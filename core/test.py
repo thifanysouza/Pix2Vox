@@ -74,15 +74,23 @@ def test_net(cfg,
             merger = torch.nn.DataParallel(merger).cuda()
 
         print('[INFO] %s Loading weights from %s ...' % (dt.now(), cfg.CONST.WEIGHTS))
-        checkpoint = torch.load(cfg.CONST.WEIGHTS)
-        epoch_idx = checkpoint['epoch_idx']
-        encoder.load_state_dict(checkpoint['encoder_state_dict'])
-        decoder.load_state_dict(checkpoint['decoder_state_dict'])
 
-        if cfg.NETWORK.USE_REFINER:
-            refiner.load_state_dict(checkpoint['refiner_state_dict'])
-        if cfg.NETWORK.USE_MERGER:
-            merger.load_state_dict(checkpoint['merger_state_dict'])
+        # Carregar o checkpoint
+        checkpoint = torch.load(cfg.CONST.WEIGHTS, map_location=torch.device('cpu'))
+
+        # Ajustar os state_dicts de todos os componentes
+        encoder_state_dict = {key.replace('module.', ''): value for key, value in checkpoint['encoder_state_dict'].items()}
+        decoder_state_dict = {key.replace('module.', ''): value for key, value in checkpoint['decoder_state_dict'].items()}
+        refiner_state_dict = {key.replace('module.', ''): value for key, value in checkpoint['refiner_state_dict'].items()} if cfg.NETWORK.USE_REFINER else None
+        merger_state_dict = {key.replace('module.', ''): value for key, value in checkpoint['merger_state_dict'].items()} if cfg.NETWORK.USE_MERGER else None
+
+        # Carregar os pesos ajustados
+        encoder.load_state_dict(encoder_state_dict)
+        decoder.load_state_dict(decoder_state_dict)
+        if refiner_state_dict:
+            refiner.load_state_dict(refiner_state_dict)
+        if merger_state_dict:
+            merger.load_state_dict(merger_state_dict)
 
     # Set up loss functions
     bce_loss = torch.nn.BCELoss()
