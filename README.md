@@ -33,6 +33,12 @@ Modelo pré-treinado em ShapeNet disponível em:
 
 - [Pix2Vox++/A](https://gateway.infinitescript.com/?fileName=Pix2Vox%2B%2B-A-ShapeNet.pth) (385.4 MB)
 
+Para correta execução do script, adicione o arquivo .pth no seguinte caminho:
+```
+./models/pre-trained/Pix2Vox++-A-ShapeNet.pth
+```
+
+
 ## Pre - requisitos
 
 #### Clone o repositório
@@ -61,9 +67,4 @@ Execução do script desenvolvido:
 
 ```
 python script.py
-```
-
-Para correta execução, adicione o arquivo .pth no seguinte caminho:
-```
-./models/pre-trained/Pix2Vox++-A-ShapeNet.pth
 ```
