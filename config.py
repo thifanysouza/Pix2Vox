@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#
+# 
 # Developed by Haozhe Xie <cshzxie@gmail.com>
 
 from easydict import EasyDict as edict
@@ -16,7 +16,7 @@ __C.DATASETS.SHAPENET.TAXONOMY_FILE_PATH    = './datasets/ShapeNet.json'
 # __C.DATASETS.SHAPENET.TAXONOMY_FILE_PATH  = './datasets/PascalShapeNet.json'
 __C.DATASETS.SHAPENET.RENDERING_PATH        = '/home/hzxie/Datasets/ShapeNet/ShapeNetRendering/%s/%s/rendering/%02d.png'
 # __C.DATASETS.SHAPENET.RENDERING_PATH      = '/home/hzxie/Datasets/ShapeNet/PascalShapeNetRendering/%s/%s/render_%04d.jpg'
-__C.DATASETS.SHAPENET.VOXEL_PATH            = '/home/hzxie/Datasets/ShapeNet/ShapeNetVox32/%s/%s/model.binvox'
+__C.DATASETS.SHAPENET.VOXEL_PATH            = '/home/hzxie/Datasets/ShapeNet/ShapeNetVox32/%s/%s.binvox'
 __C.DATASETS.PASCAL3D                       = edict()
 __C.DATASETS.PASCAL3D.TAXONOMY_FILE_PATH    = './datasets/Pascal3D.json'
 __C.DATASETS.PASCAL3D.ANNOTATION_PATH       = '/home/hzxie/Datasets/PASCAL3D/Annotations/%s_imagenet/%s.mat'
@@ -28,8 +28,14 @@ __C.DATASETS.PIX3D                          = edict()
 __C.DATASETS.PIX3D.TAXONOMY_FILE_PATH       = './datasets/Pix3D.json'
 __C.DATASETS.PIX3D.ANNOTATION_PATH          = './datasets/pix3d/pix3d.json'
 __C.DATASETS.PIX3D.RENDERING_PATH           = './datasets/pix3d/img/%s/%s.%s'
-__C.DATASETS.PIX3D.VOXEL_PATH               = './datasets/pix3d/model/%s/%s/%s.obj'
+__C.DATASETS.PIX3D.VOXEL_PATH               = './datasets/pix3d/model/%s/%s/%s.binvox'
 
+'''
+__C.DATASETS.THINGS3D                       = edict()
+__C.DATASETS.THINGS3D.TAXONOMY_FILE_PATH    = './datasets/Things3D.json'
+__C.DATASETS.THINGS3D.RENDERING_PATH        = '/home/hzxie/Datasets/Things3D/%s/%s/%s/render_%02d_final.png'
+__C.DATASETS.THINGS3D.VOXEL_PATH            = '/home/hzxie/Datasets/ShapeNet/ShapeNetVox32/%s/%s.binvox'
+'''
 #
 # Dataset
 #
@@ -37,9 +43,10 @@ __C.DATASET                                 = edict()
 __C.DATASET.MEAN                            = [0.5, 0.5, 0.5]
 __C.DATASET.STD                             = [0.5, 0.5, 0.5]
 __C.DATASET.TRAIN_DATASET                   = 'ShapeNet'
-'''__C.DATASET.TEST_DATASET                    = 'ShapeNet'''
+#__C.DATASET.TEST_DATASET                    = 'ShapeNet'
 # __C.DATASET.TEST_DATASET                  = 'Pascal3D'
-__C.DATASET.TEST_DATASET                  = 'Pix3D'
+__C.DATASET.TEST_DATASET                    = 'Pix3D'
+# __C.DATASET.TEST_DATASET                  = 'Things3D'
 
 #
 # Common
@@ -49,11 +56,13 @@ __C.CONST.DEVICE                            = '0'
 __C.CONST.RNG_SEED                          = 0
 __C.CONST.IMG_W                             = 224       # Image width for input
 __C.CONST.IMG_H                             = 224       # Image height for input
-__C.CONST.N_VOX                             = 32
 __C.CONST.BATCH_SIZE                        = 64
 __C.CONST.N_VIEWS_RENDERING                 = 1         # Dummy property for Pascal 3D
 __C.CONST.CROP_IMG_W                        = 128       # Dummy property for Pascal 3D
 __C.CONST.CROP_IMG_H                        = 128       # Dummy property for Pascal 3D
+__C.CONST.NUM_WORKER                        = 4         # number of data workers
+__C.CONST.WEIGHTS                           = "./models/pre-trained/Pix2Vox++-A-ShapeNet.pth"  # para o arquivo de pesos
+
 
 #
 # Directories
@@ -76,8 +85,7 @@ __C.NETWORK.USE_MERGER                      = True
 #
 __C.TRAIN                                   = edict()
 __C.TRAIN.RESUME_TRAIN                      = False
-__C.TRAIN.NUM_WORKER                        = 4             # number of data workers
-__C.TRAIN.NUM_EPOCHES                       = 250
+__C.TRAIN.NUM_EPOCHS                        = 250
 __C.TRAIN.BRIGHTNESS                        = .4
 __C.TRAIN.CONTRAST                          = .4
 __C.TRAIN.SATURATION                        = .4

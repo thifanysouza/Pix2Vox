@@ -38,7 +38,7 @@ Modelo pré-treinado em ShapeNet disponível em:
 #### Clone o repositório
 
 ```
-git clone https://gitlab.com/hzxie/Pix2Vox.git
+git clone https://github.com/thifanysouza/Pix2Vox.git
 ```
 
 #### Instalação de dependências
@@ -61,4 +61,9 @@ Execução do script desenvolvido:
 
 ```
 python script.py
+```
+
+Para correta execução, adicione o arquivo .pth no seguinte caminho:
+```
+./models/pre-trained/Pix2Vox++-A-ShapeNet.pth
 ```

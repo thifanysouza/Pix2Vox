@@ -1,3 +1,6 @@
+#Script desenvolvido de acordo com desafio técnico do voxar labs
+#Autora: Thifany Souza
+
 import os
 import torch
 import numpy as np
